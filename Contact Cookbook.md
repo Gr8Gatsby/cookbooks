@@ -43,7 +43,11 @@ The recipes that are helpful for APEX are:
       - Enter the name `contactImageApex`
       - Accept the default directory `force-app/main/default/lwc`
   - Command Line:
+  ```
     sfdx force:lightning:component:create --type lwc -n contactImage -d force-app/main/default/lwc
+  ```
+
+````
 
 NOTE: [SFDX Command Line Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
 
@@ -51,6 +55,7 @@ NOTE: [SFDX Command Line Reference](https://developer.salesforce.com/docs/atlas.
 
 Add this method after the `getSingleContact()` method inside of the `ContactController` class, this is located in `force-app/main/default/classes/ContactController.cls`:
 
+```java
     @AuraEnabled(cacheable=true)
     public static Contact getSingleContactById(Id recordId) {
         return [
@@ -60,41 +65,53 @@ Add this method after the `getSingleContact()` method inside of the `ContactCont
             LIMIT 1
         ];
     }
+````
 
 ### Step : add imports
 
 -In the `contactImage.js` file update the import statment to include all the decrators `@api`, `@wire`, `@track`
 
 to this:
-`import { LightningElement, api, wire, track } from 'lwc';`
+
+```javascript
+import {LightningElement, api, wire, track} from 'lwc';
+```
 
 ### Step : add import to apex
 
 In the `contactImage.js` file add this import:
-`import getSingleContactById from '@salesforce/apex/ContactController.getSingleContactById';`
+
+```javascript
+import getSingleContactById from '@salesforce/apex/ContactController.getSingleContactById';
+```
 
 ### Step : add import for scehma
 
 Using Salesforce schema ensure referential integrity and keeps strings out of JavaScript code
 Add this import to reference `@salesforce/schema` in your class
 
-`import CONTACT_IMAGE_FIELD from '@salesforce/schema/Contact.Picture__c';`
+```javascript
+import CONTACT_IMAGE_FIELD from '@salesforce/schema/Contact.Picture__c';
+```
 
 ### Step : create an object for Styles
 
 In order to expose an ability to admins to configure the image size add this `const`
 
-    const SIZE_CLASS_MAP = {
-        Small: 'slds-avatar_small',
-        Medium: 'slds-avatar_medium',
-        Large: 'slds-avatar_large',
-        Massive: 'x-large-avatar'
-    };
+```javascript
+const SIZE_CLASS_MAP = {
+  Small: 'slds-avatar_small',
+  Medium: 'slds-avatar_medium',
+  Large: 'slds-avatar_large',
+  Massive: 'x-large-avatar',
+};
+```
 
 ### Step : add class properties
 
 Setup the basic properties in the class in order to expose a public API to Admins and track internal states for HTML rendering.
 
+```javascript
     // Automatically provided on record pages
     @api recordId;
     // expose a public API with default
@@ -103,13 +120,20 @@ Setup the basic properties in the class in order to expose a public API to Admin
     @track contact;
     // detect Image Load Errors
     @track imgLoadError = false;
+```
 
 Conceptually with these APIs the component would look like this in the HTML Document:
 
-`<c-contact-image-apex record-id='AAAAAAAAAA' image-size='Small'></c-contact-image-apex>`
+```html
+<c-contact-image-apex
+  record-id="AAAAAAAAAA"
+  image-size="Small"
+></c-contact-image-apex>
+```
 
 ### Step : add call to `@wire`
 
+```javascript
      // Get data from APEX
     @wire(getSingleContactById, { recordId: '$recordId' })
     getContactData({ error, data }) {
@@ -121,21 +145,24 @@ Conceptually with these APIs the component would look like this in the HTML Docu
             this.contact = undefined;
         }
     }
+```
 
 ### Step : add Markup to the HTML Template
 
 open the `contactImageApex.html` file and add this basic markup.
 
-     <template if:true={contact}>
-        <span class={style}>
-            <template if:false={imgLoadError}>
-                <img onerror={handleImgError} src={pictureUrl} alt={pictureAlt} />
-            </template>
-            <template if:true={imgLoadError}>
-                <div class="img-error">☹️</div>
-            </template>
-        </span>
+```html
+<template if:true="{contact}">
+  <span class="{style}">
+    <template if:false="{imgLoadError}">
+      <img onerror="{handleImgError}" src="{pictureUrl}" alt="{pictureAlt}" />
     </template>
+    <template if:true="{imgLoadError}">
+      <div class="img-error">☹️</div>
+    </template>
+  </span>
+</template>
+```
 
 ### Step : add methods to class to interact with HTML template
 
