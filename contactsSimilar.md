@@ -99,12 +99,12 @@ Add this code:
     <div class="slds-m-around_medium">
       <ul class="slds-list_vertical slds-has-dividers_top-space">
         <template
-          for:each="{similarContacts}"
+          for:each={similarContacts}
           for:item="contact"
-          if:true="{similarContacts}"
+          if:true={similarContacts}
         >
-          <li key="{contact.Id}" class="slds-list__item">
-            <c-contacts-card contact="{contact}"></c-contacts-card>
+          <li key={contact.Id} class="slds-list__item">
+            <c-contacts-card contact={contact}></c-contacts-card>
           </li>
         </template>
       </ul>
@@ -198,7 +198,7 @@ Add this code:
     <!-- View Form -->
     <lightning-record-view-form
       object-api-name="Contact"
-      record-id="{contact.Id}"
+      record-id={contact.Id}
     >
       <lightning-layout multiple-rows>
         <lightning-layout-item size="6">
@@ -244,7 +244,7 @@ Replace with this code:
     <template if:false="{editMode}">
       <lightning-record-view-form
         object-api-name="Contact"
-        record-id="{contact.Id}"
+        record-id={contact.Id}
       >
         <lightning-layout multiple-rows>
           <lightning-layout-item size="6">
@@ -269,12 +269,12 @@ Replace with this code:
       </lightning-record-view-form>
     </template>
     <!-- *NEW* Edit Form -->
-    <template if:true="{editMode}">
+    <template if:true={editMode}>
       <lightning-record-edit-form
         object-api-name="Contact"
-        record-id="{contact.Id}"
-        onsuccess="{handleEditSuccess}"
-        onerror="{handleEditError}"
+        record-id={contact.Id}
+        onsuccess={handleEditSuccess}
+        onerror={handleEditError}
       >
         <lightning-layout multiple-rows>
           <lightning-layout-item size="6">
@@ -304,7 +304,7 @@ Replace with this code:
               label="Cancel"
               title="Cancel"
               type="text"
-              onclick="{handleEditCancel}"
+              onclick={handleEditCancel}
               class="slds-m-right_small"
             ></lightning-button>
             <lightning-button
@@ -319,14 +319,14 @@ Replace with this code:
       </lightning-record-edit-form>
     </template>
     <!-- *NEW* Edit Button -->
-    <template if:false="{editMode}">
+    <template if:false={editMode}>
       <lightning-button-icon
         icon-name="utility:edit"
         class="slds-col_bump-left"
         icon-class="slds-button__icon_hint"
         variant="bare"
         alternative-text="Edit Record"
-        onclick="{handleEditClick}"
+        onclick={handleEditClick}
       ></lightning-button-icon>
     </template>
   </div>
@@ -344,15 +344,15 @@ Replace with this HTML
     <!-- *NEW* Contact Image -->
     <div class="slds-media__figure">
       <c-contact-image
-        record-id="{contact.Id}"
+        record-id={contact.Id}
         image-size="Large"
       ></c-contact-image>
     </div>
     <!-- View Form -->
-    <template if:false="{editMode}">
+    <template if:false={editMode}>
       <lightning-record-view-form
         object-api-name="Contact"
-        record-id="{contact.Id}"
+        record-id={contact.Id}
       >
         <lightning-layout multiple-rows>
           <lightning-layout-item size="6">
@@ -377,12 +377,12 @@ Replace with this HTML
       </lightning-record-view-form>
     </template>
     <!-- Edit Form -->
-    <template if:true="{editMode}">
+    <template if:true={editMode}>
       <lightning-record-edit-form
         object-api-name="Contact"
-        record-id="{contact.Id}"
-        onsuccess="{handleEditSuccess}"
-        onerror="{handleEditError}"
+        record-id={contact.Id}
+        onsuccess={handleEditSuccess}
+        onerror={handleEditError}
       >
         <lightning-layout multiple-rows>
           <lightning-layout-item size="6">
@@ -412,7 +412,7 @@ Replace with this HTML
               label="Cancel"
               title="Cancel"
               type="text"
-              onclick="{handleEditCancel}"
+              onclick={handleEditCancel}
               class="slds-m-right_small"
             ></lightning-button>
             <lightning-button
@@ -427,14 +427,14 @@ Replace with this HTML
       </lightning-record-edit-form>
     </template>
     <!-- Edit Button -->
-    <template if:false="{editMode}">
+    <template if:false={editMode}>
       <lightning-button-icon
         icon-name="utility:edit"
         class="slds-col_bump-left"
         icon-class="slds-button__icon_hint"
         variant="bare"
         alternative-text="Edit Record"
-        onclick="{handleEditClick}"
+        onclick={handleEditClick}
       ></lightning-button-icon>
     </template>
   </div>
