@@ -1,0 +1,38 @@
+
+# Pre-reqs
+1. [Install latest Node](https://nodejs.org/en/download/)
+1. [Install Git](https://git-scm.com/downloads) 
+1. [Setup Dev Environment](https://trailhead.salesforce.com/en/content/learn/projects/quickstart-vscode-salesforce/vscode-salesforce-ready)
+
+# Setup the beta plugin:
+Command `sfdx plugins:install @salesforce/lwc-dev-server`
+
+# Syncronize LWC-Recipes
+`git clone https://github.com/trailheadapps/lwc-recipes.git`
+
+# Launch VS Code
+Goto diectory: `cd lwc-recipes`
+launch VS Code: `code .`
+
+# Setup local project
+Open Terminal `CTRL + ~`
+Install local deps from NPM `npm i` or `yarn`
+
+# Setup SFDX
+`SFDX: Authorize a Dev Hub`
+
+# Create a Scratch org
+`SFDX: Create a Default Scratch Org...`
+
+# Push the code
+CMD + Shift + P: `SFDX: Push Source to Default Scratch Org`
+Terminal Command: `sfdx force:source:push`
+
+# Assign the **recipes** permission set to the default user:
+Terminal Command: `sfdx force:user:permset:assign -n recipes`
+
+# Load sample data
+Terminal Command: `sfdx force:data:tree:import --plan ./data/data-plan.json`
+
+# Start the dev server
+Command `sfdx force:lightning:lwc:start`
