@@ -36,3 +36,44 @@ Terminal Command: `sfdx force:data:tree:import --plan ./data/data-plan.json`
 
 # Start the dev server
 Command `sfdx force:lightning:lwc:start`
+
+# Make a quick "record page"
+`SFDX: Create New Lightning Web Component`
+
+
+``` javascript
+import {LightningElement, api, wire, track} from 'lwc';
+import {getRecord, getFieldValue} from 'lightning/uiRecordApi';
+import CONTACT_NAME from '@salesforce/schema/Contact.Name';
+import CONTACT_PICTURE from '@salesforce/schema/Contact.Picture__c';
+import CONTACT_TITLE from '@salesforce/schema/Contact.Title';
+import CONTACT_PHONE from '@salesforce/schema/Contact.Phone';
+
+const FIELDS = [CONTACT_NAME, CONTACT_PHONE, CONTACT_PICTURE, CONTACT_TITLE];
+
+export default class RecordPage extends LightningElement {
+  @api recordId = '0036300000YDRSUAA5';
+  @track contact = {};
+
+  @wire (getRecord, {
+    recordId: '$recordId',
+    fields: FIELDS,
+  })
+  wiredData({error, data}) {
+    if (error) {
+      //TODO :error message
+    } else if (data) {
+      this.contact.Name = getFieldValue (data, CONTACT_NAME);
+      this.contact.Phone = getFieldValue (data, CONTACT_PHONE);
+      this.contact.Title = getFieldValue (data, CONTACT_TITLE);
+      this.contact.Picture__c = getFieldValue (data, CONTACT_PICTURE);
+    }
+  }
+}
+```
+
+``` html
+<template>
+    <c-contact-tile contact={contact}></c-contact-tile>
+</template>
+```
