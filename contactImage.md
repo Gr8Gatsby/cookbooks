@@ -124,12 +124,12 @@ Conceptually with these APIs the component would look like this in the HTML Docu
 open the `contactImageApex.html` file and add this basic markup.
 
 ```html
-<template if:true="{contact}">
-  <span class="{style}">
-    <template if:false="{imgLoadError}">
-      <img onerror="{handleImgError}" src="{pictureUrl}" alt="{pictureAlt}" />
+<template if:true={contact}>
+  <span class={style}>
+    <template if:false={imgLoadError}>
+      <img onerror={handleImgError} src={pictureUrl} alt={pictureAlt} />
     </template>
-    <template if:true="{imgLoadError}">
+    <template if:true={imgLoadError}>
       <div class="img-error">☹️</div>
     </template>
   </span>
