@@ -218,14 +218,14 @@ Replace with
 ```html
 <template>
   <div class="container">
-    <template if:false="{isFirst}"
+    <template if:false={isFirst}
       ><span class="divider">&lt;</span></template
     >
     <c-contact-image
-      record-id="{contact.Id}"
+      record-id={contact.Id}
       image-size="Small"
     ></c-contact-image>
-    <a href="#" onclick="{navigateToContact}">{contact.Name}</a>
+    <a href="#" onclick={navigateToContact}>{contact.Name}</a>
   </div>
 </template>
 ```
