@@ -1,4 +1,4 @@
-### Step 1: Create the component `contactsSimilar`
+### Step 1: Create the component `contactsReportsTo`
 
 - Create a new component:
   - Visual Studio Code:
