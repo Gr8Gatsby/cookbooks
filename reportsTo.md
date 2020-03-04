@@ -96,22 +96,22 @@ Replace with
 
 ```html
 <template>
-  <template if:true="{organization.length}">
+  <template if:true={organization.length}>
     <div class="container">
-      <template iterator:it="{organization}">
-        <span key="{it.value.Id}">
+      <template iterator:it={organization}>
+        <span key={it.value.Id}>
           <c-contact-reports-to-person
-            contact="{it.value}"
-            is-first="{it.first}"
+            contact={it.value}
+            is-first={it.first}
           ></c-contact-reports-to-person>
         </span>
       </template>
     </div>
   </template>
-  <template if:false="{organization.length}">
+  <template if:false={organization.length}>
     No report to set
   </template>
-  <template if:true="{error}">
+  <template if:true={error}>
     There was an error!
   </template>
 </template>
