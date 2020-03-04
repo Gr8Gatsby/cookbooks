@@ -77,3 +77,47 @@ export default class RecordPage extends LightningElement {
     <c-contact-tile contact={contact}></c-contact-tile>
 </template>
 ```
+
+# More complex record page
+``` html
+<template>
+    <template if:true={recordId}>
+        <select id="recordIds" onchange={handleRecordChange}>
+            <template for:each={people} for:item="Person">
+                <option key={Person.Id} value={Person.Id}>{Person.Name}</option>
+            </template>
+
+        </select>
+
+        <div class="break"></div>
+
+        <c-contact-image-apex image-size={imageSize} record-id={recordId}></c-contact-image-apex>
+
+        <select id="imageSize" onchange={handleSizeChange}>
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+            <option value="Massive">Massive</option>
+        </select>
+
+        <div class="break"></div>
+
+        <c-contact-tile contact={contact}></c-contact-tile>
+
+        <div class="break"></div>
+
+        <lightning-record-edit-form record-id={recordId} object-api-name="Contact">
+            <lightning-messages>
+            </lightning-messages>
+            <lightning-input-field field-name="Name">
+            </lightning-input-field>
+            <lightning-input-field field-name="Title">
+            </lightning-input-field>
+            <lightning-input-field field-name="Phone">
+            </lightning-input-field>
+            <lightning-button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update">
+            </lightning-button>
+        </lightning-record-edit-form>
+    </template>
+</template>
+```
