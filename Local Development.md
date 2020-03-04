@@ -121,3 +121,14 @@ export default class RecordPage extends LightningElement {
     </template>
 </template>
 ```
+# Add CSS
+
+``` css
+.break{
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+```
