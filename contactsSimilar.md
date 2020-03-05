@@ -104,7 +104,7 @@ Add this code:
           if:true={similarContacts}
         >
           <li key={contact.Id} class="slds-list__item">
-            <c-contacts-card contact={contact}></c-contacts-card>
+            <c-contact-card contact={contact}></c-contact-card>
           </li>
         </template>
       </ul>
@@ -343,10 +343,10 @@ Replace with this HTML
   <div class="slds-grid slds-hint-parent">
     <!-- *NEW* Contact Image -->
     <div class="slds-media__figure">
-      <c-contact-image
+      <c-contact-image-apex
         record-id={contact.Id}
         image-size="Large"
-      ></c-contact-image>
+      ></c-contact-image-apex>
     </div>
     <!-- View Form -->
     <template if:false={editMode}>
